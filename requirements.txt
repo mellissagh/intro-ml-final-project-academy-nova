@@ -1,0 +1,16 @@
+cat > requirements.txt <<'EOF'
+numpy
+pandas
+scikit-learn
+matplotlib
+seaborn
+scipy
+xgboost
+lightgbm
+catboost
+shap
+optuna
+jupyter
+notebook
+openpyxl
+EOF

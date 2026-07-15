@@ -1,4 +1,3 @@
-cat > .gitignore <<'EOF'
 # Python
 __pycache__/
 *.pyc
@@ -13,14 +12,15 @@ __MACOSX/
 venv/
 env/
 
+# Course datasets and generated CSVs should stay local
+data/raw/*.csv
+data/processed/*.csv
+data/submissions/*.csv
+
 # Large temporary model files
 *.pkl
 *.joblib
 *.log
 
-# Optional: keep raw data local if needed
-# data/raw/*.csv
-
 # Final zip should be created only at the end
 final_submission/*.zip
-EOF

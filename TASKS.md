@@ -44,13 +44,13 @@ Main metric: ROC-AUC
 - [x] Dataset overview table
 - [x] Target distribution plot
 - [x] Numeric feature summary
-- [] Categorical feature summary
-- [ ] Date feature analysis
-- [ ] Train/test distribution comparison
+- [x] Categorical feature summary
+- [x] Date feature analysis
+- [x] Train/test distribution comparison
 - [x] Missing-value count and percentage table
 - [x] Missing-value visualization
 - [x] Missingness by target
-- [ ] Missing-value imputation decisions
+- [x] Missing-value imputation decisions
 - [x] Explain every important EDA plot in markdown
 - [ ] Add most important EDA plots to report
 

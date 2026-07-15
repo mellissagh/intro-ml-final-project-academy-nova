@@ -13,7 +13,7 @@ Main metric: ROC-AUC
 - [x] Add `.gitignore`
 - [x] Keep raw data local and outside GitHub
 - [x] Save best known leaderboard submission as safe backup
-- [xx] Add partner as collaborator
+- [x] Add partner as collaborator
 - [ ] Confirm student names and IDs
 - [ ] Confirm final file names:
   - `Submission_51_Group.csv`
@@ -41,17 +41,17 @@ Main metric: ROC-AUC
 
 ## 2. EDA and Missing Values — 25%
 
-- [ ] Dataset overview table
-- [ ] Target distribution plot
-- [ ] Numeric feature summary
-- [ ] Categorical feature summary
+- [x] Dataset overview table
+- [x] Target distribution plot
+- [x] Numeric feature summary
+- [] Categorical feature summary
 - [ ] Date feature analysis
 - [ ] Train/test distribution comparison
-- [ ] Missing-value count and percentage table
-- [ ] Missing-value visualization
-- [ ] Missingness by target
+- [x] Missing-value count and percentage table
+- [x] Missing-value visualization
+- [x] Missingness by target
 - [ ] Missing-value imputation decisions
-- [ ] Explain every important EDA plot in markdown
+- [x] Explain every important EDA plot in markdown
 - [ ] Add most important EDA plots to report
 
 ---

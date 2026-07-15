@@ -13,7 +13,7 @@ Main metric: ROC-AUC
 - [x] Add `.gitignore`
 - [x] Keep raw data local and outside GitHub
 - [x] Save best known leaderboard submission as safe backup
-- [ ] Add partner as collaborator
+- [xx] Add partner as collaborator
 - [ ] Confirm student names and IDs
 - [ ] Confirm final file names:
   - `Submission_51_Group.csv`

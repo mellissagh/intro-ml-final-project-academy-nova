@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Group_51_Report</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="academy-nova-course-cancellation-prediction">Academy Nova Course
+Cancellation Prediction</h1>
+<h2 id="final-project-report-group-51">Final Project Report — Group
+51</h2>
+<p><strong>Course:</strong> Introduction to Machine Learning<br />
+<strong>Project:</strong> Nova Academy Course Cancellation
+Prediction<br />
+<strong>Group:</strong> 51<br />
+<strong>Metric:</strong> ROC-AUC<br />
+<strong>Best known public leaderboard AUC:</strong> 0.889030</p>
+<hr />
+<h2 id="executive-summary">1. Executive Summary</h2>
+<p>Nova Academy wants to predict the probability that a client will
+cancel or drop a course registration before the course starts. This is a
+binary classification problem where each registration receives a
+cancellation probability.</p>
+<p>We followed a full machine-learning workflow based on CRISP-DM:
+business understanding, data exploration, preprocessing, feature
+engineering, model training, evaluation, explainability, and final
+submission generation.</p>
+<p>The final submitted prediction file contains two columns:
+<code>Client_ID</code> and <code>Drop_Probability</code>. The final file
+was validated to ensure correct row count, no missing predictions, no
+duplicate IDs, valid probability values, and exact preservation of the
+test-set <code>Client_ID</code> order.</p>
+<p>Our best known public leaderboard result for Group 51 was <strong>AUC
+= 0.889030</strong>, placing the group in <strong>2nd place</strong> on
+the leaderboard.</p>
+<hr />
+<h2 id="business-understanding">2. Business Understanding</h2>
+<p>The business goal is to help Nova Academy identify registrations with
+high cancellation risk. Accurate cancellation probabilities can support
+operational decisions such as proactive customer support, better
+resource planning, course capacity management, and reducing financial
+loss from cancellations.</p>
+<p>The evaluation metric is ROC-AUC. This metric is appropriate because
+the goal is not only to classify each client using a fixed threshold,
+but to rank clients by cancellation risk. The final submission therefore
+contains probabilities rather than hard labels.</p>
+<hr />
+<h2 id="data-understanding-and-eda">3. Data Understanding and EDA</h2>
+<p>The training set contains 63,464 rows and 29 columns, including the
+target variable <code>Dropped_Course</code>. The test set contains
+15,866 rows and 28 columns, with the same features but without the
+target.</p>
+<p>The target distribution showed moderate class imbalance:
+approximately 41.4% of the training registrations were cancelled and
+58.6% were not cancelled. Because of this, accuracy alone would be less
+informative than ROC-AUC.</p>
+<p>Exploratory data analysis included numeric distributions, categorical
+distributions, target relationships, missing-value patterns, and
+date-based trends.</p>
+<p>A key finding was that the train and test sets are temporally
+shifted. The training dates range from 2015-07-01 to 2017-04-26, while
+the test set starts around 2017-04-26 and continues until 2017-08-31.
+This suggests that random cross-validation may be optimistic, so a
+time-aware validation split was also evaluated.</p>
+<hr />
+<h2 id="missing-values-and-preprocessing">4. Missing Values and
+Preprocessing</h2>
+<p>Several columns contained missing values. <code>Company_ID</code> had
+very high missingness, while <code>Agent_ID</code>,
+<code>Registration_Days_Before</code>,
+<code>Requested_Lab_Config</code>, <code>Physical_Course_Kits</code>,
+and several categorical columns also had missing values.</p>
+<p>Instead of simply removing rows or columns, we treated missingness as
+a potential predictive signal. Missing-indicator features were created
+for important columns, such as company, agent, registration timing,
+requested lab configuration, daily tuition cost, and participant
+count.</p>
+<p>Numerical missing values were handled with median imputation, while
+categorical missing values were handled with a constant
+<code>"Missing"</code> category. Preprocessing was implemented inside a
+pipeline to avoid data leakage. The preprocessing pipeline was fit only
+on the training data and then applied to validation or test data.</p>
+<p>Categorical variables were encoded using one-hot encoding with
+<code>handle_unknown="ignore"</code> to safely handle categories
+appearing in the test set but not in training.</p>
+<hr />
+<h2 id="feature-engineering-and-outlier-analysis">5. Feature Engineering
+and Outlier Analysis</h2>
+<p>Feature engineering was based on the business logic of course
+registrations. We created participant-based, cost-based,
+previous-history, support-ticket, registration-change, missingness,
+lab-configuration, and date-based features.</p>
+<p>Important engineered features included:</p>
+<ul>
+<li><code>Total_Participants</code></li>
+<li><code>Active_Participants</code></li>
+<li><code>Observer_Ratio</code></li>
+<li><code>Student_Ratio</code></li>
+<li><code>Professional_Ratio</code></li>
+<li><code>Total_Hours</code></li>
+<li><code>Practical_Ratio</code></li>
+<li><code>Cost_Per_Hour</code></li>
+<li><code>Cost_Per_Participant</code></li>
+<li><code>Prev_Total_Courses</code></li>
+<li><code>Prev_Dropout_Rate</code></li>
+<li><code>Support_Per_Participant</code></li>
+<li><code>Changes_Per_Waiting_Day</code></li>
+<li><code>Lab_Config_Mismatch</code></li>
+<li><code>Has_Company</code></li>
+<li><code>Has_Agent</code></li>
+<li>date features such as month, quarter, day of week, and week of
+year</li>
+</ul>
+<p>Outliers were analyzed using distribution plots, boxplots, and
+IQR-based summaries. We avoided blindly deleting outliers because many
+extreme values may represent real business cases. Since the main models
+were tree-based, they could handle nonlinear effects and extreme values
+more robustly than linear models. Test rows were never removed.</p>
+<hr />
+<h2 id="modeling-and-validation-strategy">6. Modeling and Validation
+Strategy</h2>
+<p>We compared several model families:</p>
+<ul>
+<li>Logistic Regression</li>
+<li>Random Forest</li>
+<li>HistGradientBoosting</li>
+<li>LightGBM</li>
+</ul>
+<p>The baseline models showed that gradient-boosting methods performed
+best. Logistic Regression gave a useful simple baseline, but boosting
+models captured nonlinear interactions more effectively.</p>
+<p>The validation strategy included:</p>
+<ol type="1">
+<li>Stratified K-Fold cross-validation<br />
+</li>
+<li>Train AUC and validation AUC comparison<br />
+</li>
+<li>Overfitting gap analysis<br />
+</li>
+<li>Per-fold ROC curves<br />
+</li>
+<li>Time-aware validation because of the temporal train/test shift</li>
+</ol>
+<p>This allowed us to compare models not only by average validation AUC,
+but also by stability and overfitting behavior.</p>
+<hr />
+<h2 id="model-results-and-hyperparameter-tuning">7. Model Results and
+Hyperparameter Tuning</h2>
+<p>The main model comparison showed that LightGBM achieved the strongest
+validation performance. The tuned deeper LightGBM model achieved the
+highest random cross-validation AUC, while the baseline LightGBM had a
+slightly smaller train-validation gap.</p>
+<p>Approximate validation results:</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th style="text-align: right;">Validation AUC</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Logistic Regression</td>
+<td style="text-align: right;">0.9037</td>
+<td>Simple linear baseline</td>
+</tr>
+<tr>
+<td>Random Forest</td>
+<td style="text-align: right;">0.8865</td>
+<td>Low overfitting but weaker performance</td>
+</tr>
+<tr>
+<td>HistGradientBoosting</td>
+<td style="text-align: right;">0.9477</td>
+<td>Strong boosting baseline</td>
+</tr>
+<tr>
+<td>LightGBM baseline</td>
+<td style="text-align: right;">0.9497</td>
+<td>Strong and stable</td>
+</tr>
+<tr>
+<td>LightGBM tuned/deeper</td>
+<td style="text-align: right;">0.9523</td>
+<td>Highest random CV AUC</td>
+</tr>
+</tbody>
+</table>
+<p>Although random cross-validation AUC was high, time-aware validation
+was lower, around 0.902. This supported the conclusion that the data has
+temporal distribution shift and that leaderboard performance may be
+lower than random CV performance.</p>
+<p>The final known public leaderboard AUC was
+<strong>0.889030</strong>.</p>
+<hr />
+<h2 id="model-evaluation-and-explainability">8. Model Evaluation and
+Explainability</h2>
+<p>Model evaluation focused on ROC-AUC because the final output is a
+probability ranking. Per-fold ROC curves were used to check that
+performance was consistent across validation folds.</p>
+<p>We also used explainability methods such as feature importance and
+SHAP-style analysis to understand which features influenced cancellation
+probability. The model relied on business-relevant patterns, including
+registration timing, previous client behavior, support interactions,
+course structure, missing company or agent information, and
+lab-configuration mismatch.</p>
+<p>High-risk predictions were generally associated with patterns such as
+higher previous dropout behavior, missing company information, unusual
+registration behavior, and certain timing/configuration patterns.
+Lower-risk predictions were generally associated with more stable
+registration history and clearer organizational metadata.</p>
+<hr />
+<h2 id="final-submission">9. Final Submission</h2>
+<p>The final submission file is:</p>
+<p><code>Group_51_Submission.csv</code></p>
+<p>It contains exactly two columns:</p>
+<ol type="1">
+<li><code>Client_ID</code></li>
+<li><code>Drop_Probability</code></li>
+</ol>
+<p>The file was validated using the following checks:</p>
+<ul>
+<li>Row count equals the test set row count: 15,866</li>
+<li>Columns are exactly <code>Client_ID</code> and
+<code>Drop_Probability</code></li>
+<li>No missing values</li>
+<li>No duplicate <code>Client_ID</code> values</li>
+<li>All probabilities are between 0 and 1</li>
+<li><code>Client_ID</code> order exactly matches the original test
+file</li>
+</ul>
+<p>The final submitted file uses the best known leaderboard-safe
+prediction file, which achieved <strong>AUC = 0.889030</strong>.</p>
+<hr />
+<h2 id="limitations-and-future-improvements">10. Limitations and Future
+Improvements</h2>
+<p>The main limitation is temporal distribution shift between training
+and test data. Random cross-validation likely overestimates performance
+because it mixes dates, while the test set represents a future time
+period.</p>
+<p>Future improvements could include:</p>
+<ul>
+<li>stronger time-aware validation</li>
+<li>model retraining with more recent data</li>
+<li>more careful treatment of high-cardinality IDs</li>
+<li>safer target encoding inside cross-validation</li>
+<li>probability calibration</li>
+<li>additional ensemble/blending experiments</li>
+<li>deeper error analysis by client segment and course type</li>
+</ul>
+<p>Overall, the project produced a validated machine-learning pipeline,
+strong public leaderboard performance, and interpretable insights into
+cancellation risk.</p>
+</body>
+</html>

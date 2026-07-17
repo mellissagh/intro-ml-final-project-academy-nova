@@ -24,7 +24,7 @@ The main evaluation metric is ROC-AUC.
 The final submission file must contain exactly two columns:
 
 - `Client_ID`
-- `Probability_Drop`
+- `Drop_Probability`
 
 ## Repository Structure
 
